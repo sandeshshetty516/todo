@@ -1,13 +1,11 @@
 import React from 'react';
 import './App.scss';
-import Input from './Components/Input/Input';
-import Logo from './Components/Logo/Logo';
+import Homepage from './Pages/Homepage/Homepage';
 
 function App() {
   return (
     <div>
-      <Logo />
-      <Input />
+      <Homepage />
     </div>
   );
 }
