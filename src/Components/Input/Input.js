@@ -3,7 +3,7 @@ import uuid from "react-uuid";
 import './Input.scss';
 
 
-const Input =() => {
+const Input = () => {
 
     const getItems = () => {
         return JSON.parse(localStorage.getItem('list'))
