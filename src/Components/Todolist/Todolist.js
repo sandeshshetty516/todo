@@ -10,7 +10,20 @@ const Todolist = () => {
         if(item) {
             return JSON.parse(localStorage.getItem('lists'))
         } else {
-            return []
+            return [
+                {
+                    id: uuid(),
+                    task: 'Create Todolist'
+                },
+                {
+                    id: uuid(),
+                    task: 'Build a web app using React'
+                },
+                {
+                    id: uuid(),
+                    task: 'Create a task'
+                },
+            ]
         }
     }
 
