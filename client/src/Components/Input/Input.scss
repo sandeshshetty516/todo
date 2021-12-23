@@ -1,0 +1,109 @@
+@import '/src/variable.scss';
+
+.inputDiv{
+	height: 75px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+    & .input{
+        padding: 0.5rem 1rem;
+        outline: none;
+        border: none;
+        background: none;
+        height: 50px;
+        border-radius: 10px;
+        width: 500px;
+        margin: 0.25rem;
+        background: #fff;
+        transition: .5s;
+        font-size: 1.15rem;
+        font-family: 'Hind Siliguri', sans-serif;
+    }
+
+    & .add {
+        border: none;
+        height: 50px;
+        border-radius: 10px;
+        width: 65px;
+        font-size: 17px;
+        font-weight: bold;
+        background-color: $add;
+        color: #fff;
+        cursor: pointer;
+        margin: 0.25rem;
+    }
+
+    & .edit {
+        border: none;
+        height: 50px;
+        border-radius: 10px;
+        width: 65px;
+        font-size: 20px;
+        font-weight: bold;
+        background-color: $edit;
+        color: #fff;
+        cursor: pointer;
+        margin: 0.25rem;
+    }
+}
+
+.todoList{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+	margin-top: 2rem;
+    font-family: 'Hind Siliguri', sans-serif;
+
+    & .item {
+        display: flex;
+        padding: 4px;
+        width: 570px;
+        height: 50px;
+        border-bottom: 3px solid $primary-color;
+        border-top: 3px solid $primary-color;
+        border-radius: 10px;
+        color: $primary-color;
+        margin: 2px auto;
+
+        & .todo {
+            font-size: 20px;
+            background: none;
+            color: $primary-color;
+            font-weight: 600;
+            width: 450px;
+            padding: 8px 10px;
+            border: none;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+
+        & .edit {
+            background: $edit;
+            color: #fff;
+            border-radius: 50%;
+            height: 35px;
+            font-size: 15px;
+            width: 35px;
+            font-weight: bold;
+            margin: 0 5px;
+            cursor: pointer;
+            border: none;
+            padding: 10px 10px;
+        }
+
+        & .delete {
+            background: $delete;
+            color: #fff;
+            border-radius: 50%;
+            height: 35px;
+            font-size: 15px;
+            width: 35px;
+            font-weight: bold;
+            margin: 0 5px;
+            cursor: pointer;
+            border: none;
+            padding: 10px 10px;
+        }
+    }
+}

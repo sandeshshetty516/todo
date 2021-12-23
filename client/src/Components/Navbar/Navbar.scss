@@ -1,0 +1,35 @@
+@import '/src/variable.scss';
+
+.nav {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+
+    & .logo h2 {
+        color: $primary-color;
+        font-size: 3rem;
+        font-weight: 50;
+        text-align: center;
+        margin: 1rem 0 3rem; 
+        font-family: 'Lobster', cursive;
+        
+        & .title {
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+    }
+
+    & .signout {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        color: white;
+        cursor: pointer;
+        font-size: 20px;
+
+        & i {
+            color: red;
+            margin-right: 5px;
+        }
+    }
+}
