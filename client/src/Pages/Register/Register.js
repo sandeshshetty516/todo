@@ -20,7 +20,7 @@ const Register = ({onRouteChange,loadUser}) => {
         setPassword(event.target.value)
     }
 
-    const onSubmitSignin = () => {
+    const onSubmitRegister = () => {
         fetch('http://localhost:3001/register', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
@@ -61,8 +61,8 @@ const Register = ({onRouteChange,loadUser}) => {
                     </div>
                     
                     </fieldset>
-                    <div className="">
-                        <Button onClick={onSubmitSignin} className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" value="Register"/>
+                    <div className="tc">
+                        <Button onClick={onSubmitRegister} className="b ph3 pv2 input-reset ba b--blue bg-blue grow pointer f6 dib" value="Register"/>
                     </div>
                 </div>
             </main>

@@ -51,11 +51,11 @@ const Signin = ({onRouteChange, loadUser}) => {
                     </div>
                     
                     </fieldset>
-                    <div className="">
-                        <Button onClick={onSubmitSignin} className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"  value="Sign In" />
+                    <div className="tc">
+                        <Button onClick={onSubmitSignin} className="b ph3 pv2 input-reset ba b--blue bg-blue grow pointer f6 dib"  value="Sign In" />
                     </div>
-                    <div className="lh-copy mt3">
-                        <p onClick={() => onRouteChange('register')} className="f6 link dim black db pointer">Register</p>
+                    <div className="tc lh-copy mt2">
+                        <p onClick={() => onRouteChange('register')} className="b f6 link dim black db pointer">Register</p>
                     </div>
                 </div>
             </main>
