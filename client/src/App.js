@@ -1,48 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.scss';
-import Navbar from './Components/Navbar/Navbar';
+import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom'
 import Homepage from './Pages/Homepage/Homepage';
 import Register from './Pages/Register/Register';
 import Signin from './Pages/Signin/Signin';
+import Navbar from './Components/Navbar/Navbar';
 
 function App() {
+  const [user, setUser] = useState(null)
 
-  const [route, setRoute] = useState('signin');
-  const [signIn, setSignIn] = useState(false);
-  const [user, setUser] = useState({
-    id:'',
-    name:'',
-    email:''
-  })
+  useEffect(() => {
+    const users = JSON.parse(localStorage.getItem('users'))
+    setUser(users)
+  }, [])
 
-  const loadUser = (data) => {
-    setUser({
-      id: data.user_id,
-      name: data.name,
-      email: data.email
-    })
-  }
-
-  const onRouteChange = (route) => {
-    if (route === 'signout') {
-      setSignIn(false)
-    } else if (route === 'home') {
-      setSignIn(true)
-    }
-    setRoute(route)
-  }
+  useEffect(() => {
+    localStorage.setItem('users', JSON.stringify(user))
+  }, [user])
 
   return (
-    <div>
-      <Navbar signIn={signIn} onRouteChange={onRouteChange} />
-      { route === 'home' 
-      ? <Homepage name={user.name} uId={user.id} />
-      : ( route === 'register' 
-      ? <Register loadUser={loadUser} onRouteChange={onRouteChange} />
-      : <Signin loadUser={loadUser}  onRouteChange={onRouteChange} />)
-      }
-      
-    </div>
+    <Router>
+      <Navbar user={user} setUser={setUser}/>
+      <Routes>
+        <Route exact path='/' element={user === null ? <Navigate to='/signin' /> : <Homepage user={user}/>}></Route>
+        <Route path='/signin'  element={user ? <Navigate to='/'/> : <Signin setUser={setUser}/>}></Route>
+        <Route path='/register'  element={user ? <Navigate to='/'/> : <Register setUser={setUser}/>}></Route>
+      </Routes>
+    </Router>
   );
 }
 

@@ -2,11 +2,11 @@ import React from "react";
 import Todolist from "../../Components/Todolist/Todolist";
 import './Homepage.scss'
 
-const Homepage = ({name, uId}) => {
+const Homepage = ({user}) => {
     return (
         <>
-        <div className="name">Hi {name}</div>
-        <Todolist uId={uId} />
+            <div className="name">Hi {user.name}</div>
+            <Todolist uId={user.user_id} />
         </>
     )
 }

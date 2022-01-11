@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Button from "../../Components/Button/Button";
 import Input from "../../Components/Input/Input";
+import { Link } from 'react-router-dom';
 
-const Signin = ({onRouteChange, loadUser}) => {
+const Signin = ({setUser}) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -16,7 +17,7 @@ const Signin = ({onRouteChange, loadUser}) => {
     }
 
     const onSubmitSignin = () => {
-        fetch('http://localhost:3001/signin', {
+        fetch('http://localhost:4000/signin', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -27,8 +28,7 @@ const Signin = ({onRouteChange, loadUser}) => {
         .then(response => response.json())
         .then(user => {
             if(user.user_id) {
-                loadUser(user);
-                onRouteChange('home');
+                setUser(user)
             } else {
                 alert('Incorrect email or password')
             }
@@ -37,7 +37,7 @@ const Signin = ({onRouteChange, loadUser}) => {
 
     return(
         <article className="br3 ba dark-gray bg-white b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
-            <main className="pa4 black-80">
+            <main className="pt4 pb3 ph4 black-80">
                 <div className="measure">
                     <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
                     <legend className="f2 fw6 ph0 mh0">Sign In</legend>
@@ -51,12 +51,16 @@ const Signin = ({onRouteChange, loadUser}) => {
                     </div>
                     
                     </fieldset>
+                    <Link to='/'>
                     <div className="tc">
-                        <Button onClick={onSubmitSignin} className="b ph3 pv2 input-reset ba b--blue bg-blue grow pointer f6 dib"  value="Sign In" />
+                        <Button onClick={onSubmitSignin} className="shadow-2 b ph3 pv2 input-reset ba b--blue bg-blue grow pointer f6 dib"  value='Sign In' />
                     </div>
+                    </Link>
+                    <Link to='/register'>
                     <div className="tc lh-copy mt2">
-                        <p onClick={() => onRouteChange('register')} className="b f6 link dim black db pointer">Register</p>
+                        <p className=" b f6 link dim black db pointer">Register</p>
                     </div>
+                    </Link>
                 </div>
             </main>
         </article>

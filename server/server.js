@@ -100,16 +100,22 @@ app.post('/todo', (req, res) => {
             user_id: userId
         })
         .into('todo')
+        .then(
+            db.select('*').from('todo').where('user_id', '=', userId)
+            .then(data => {
+                res.json(data)
+            })
+        )
         .then(trx.commit)
         .catch(trx.rollback)
     })
     .catch(err => res.status(400).json('unable to add task'))
 })
 
-app.get('/todo/:id', (req,res) => {
-    const {id} = req.params
+app.get('/todo/:user_id', (req,res) => {
+    const {user_id} = req.params
     db.select('*').from('todo').where({
-        user_id: id
+        user_id: user_id
     }).orderBy('table_id', 'asc')
     .then(todo => {
         res.json(todo)
@@ -117,25 +123,37 @@ app.get('/todo/:id', (req,res) => {
     .catch(err => res.status(400).json('no task found'))
 })
 
-app.put('/todo/:id', (req, res) => {
-    const { id } = req.params;
+app.put('/:userId/todo/:id', (req, res) => {
+    const { userId, id } = req.params;
     const { task } = req.body;
     db('todo').where({
         task_id: id
     }).update({
         task: task
     })
+    .then(
+        db.select('*').from('todo').where('user_id', '=', userId)
+        .then(data => {
+            res.json(data)
+        })
+    )
     .catch(err => res.status(400).json('cannot edit the task'))
 })
 
-app.delete('/todo/:id', (req, res) => {
-    const { id } = req.params;
+app.delete('/:userId/todo/:id', (req, res) => {
+    const { userId, id } = req.params;
     db('todo').del().where({
         task_id: id
     })
+    .then(
+        db.select('*').from('todo').where('user_id', '=', userId)
+        .then(data => {
+            res.json(data)
+        })
+    )
     .catch(err => res.status(400).json('cannot delete'))
 })
 
-app.listen(3001, () => {
+app.listen(4000, () => {
     console.log('app is running')
 })

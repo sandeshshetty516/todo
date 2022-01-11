@@ -10,25 +10,24 @@ const Todolist = ({uId}) => {
     const [toggle, setToggle] = useState(true);
     const [editItem, setEditItem] = useState(null)
 
+    const url = `http://localhost:4000/todo/${uId}`
+
     useEffect(() => {
-        fetch(`http://localhost:3001/todo/${uId}`, {
-            method: 'get',
-            headers: {'Content-Type': 'application/json'}
-        })
-        .then(response => response.json())
-        .then(todos => {
-            if(todos) {
-                setList(todos)
-            } else {
-                setList([])
-            }
-        })
-    })
+        const loadData = async () => {
+            const res = await fetch(url)
+            const data = res.json()
+            return data;
+        }
+    
+        loadData().then((data) => setList(data))
+    }, [url])
+
+    
 
     const handleSubmit = (e) => {
         e.preventDefault()
         if(todo && toggle) {
-            fetch('http://localhost:3001/todo', {
+            fetch('http://localhost:4000/todo', {
                 method: 'post',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
@@ -37,25 +36,28 @@ const Todolist = ({uId}) => {
                     task: todo
                 })
             })
+            window.location.reload(false);
             setTodo('');
         } else if(todo && !toggle) {
-            fetch(`http://localhost:3001/todo/${editItem}`, {
+            fetch(`http://localhost:4000/${uId}/todo/${editItem}`, {
                 method: 'put',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
                     task: todo
                 })
             })
+            window.location.reload(false);
             setTodo('')
             setToggle(true)
         }
     }
 
     const deleteFunction = (id) => {
-        fetch(`http://localhost:3001/todo/${id}`, {
+        fetch(`http://localhost:4000/${uId}/todo/${id}`, {
             method: 'delete',
             headers: {'Content-Type': 'application/json'}
         })
+        window.location.reload(false);
     }
 
     const editFunction = (id) => {

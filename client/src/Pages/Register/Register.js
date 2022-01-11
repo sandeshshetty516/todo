@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "../../Components/Button/Button";
 import Input from "../../Components/Input/Input";
 
-const Register = ({onRouteChange,loadUser}) => {
+const Register = ({setUser}) => {
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('');
@@ -21,7 +21,7 @@ const Register = ({onRouteChange,loadUser}) => {
     }
 
     const onSubmitRegister = () => {
-        fetch('http://localhost:3001/register', {
+        fetch('http://localhost:4000/register', {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -33,10 +33,9 @@ const Register = ({onRouteChange,loadUser}) => {
         .then(response => response.json())
         .then(user => {
             if(user.user_id) {
-                loadUser(user);
-                onRouteChange('home')
+                setUser(user);
             } else {
-                console.log(user)
+                alert('Incorrect form submission')
             }
         })
     }
@@ -62,7 +61,7 @@ const Register = ({onRouteChange,loadUser}) => {
                     
                     </fieldset>
                     <div className="tc">
-                        <Button onClick={onSubmitRegister} className="b ph3 pv2 input-reset ba b--blue bg-blue grow pointer f6 dib" value="Register"/>
+                        <Button onClick={onSubmitRegister} className="shadow-2 b ph3 pv2 input-reset ba b--blue bg-blue grow pointer f6 dib" value="Register"/>
                     </div>
                 </div>
             </main>
